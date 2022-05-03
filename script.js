@@ -40,6 +40,26 @@ async function SaveToDbAsync(formData) {
     }
 }
 
+function GoogleSignIn() {
+    const provider = new GoogleAuthProvider();
+    const auth = getAuth();
+
+    try {
+        const result = await signInWithPopup(auth, provider)
+        user = auth().currentUser;
+    }
+    catch (err) {
+        console.log(err.message);
+        error = {
+            errorCode: err.code,
+            errorMessage: err.message,
+            email: err.email,
+            credential: GoogleAuthProvider.credentialFromError(err),
+        };
+    }
+
+}
+
 document.addEventListener("DOMContentLoaded", (event) => {
 
     const fromElmt = document.getElementById("guestForm");
@@ -77,28 +97,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             alert(msg)
             return false;
         }
-
-        const provider = new GoogleAuthProvider();
-        provider.addScope('https://www.googleapis.com/auth/admin.directory.customer');
-        const auth = getAuth();
-
-        if (currentUser !== null) {
-            try {
-
-                const result = await signInWithPopup(auth, provider)
-
-                user = auth().currentUser
-            }
-            catch (err) {
-                console.log(err.message);
-                error = {
-                    errorCode: err.code,
-                    errorMessage: err.message,
-                    email: err.email,
-                    credential: GoogleAuthProvider.credentialFromError(err),
-                };
-            }
-        }
+        if (currentUser === null) GoogleSignIn();
 
         const formData = {
             Name: `${firstNameElmt.value} ${lastNameElmt.value}`,
