@@ -1,0 +1,43 @@
+*,
+*::before,
+*::after {
+    margin    : 0;
+    padding   : 0;
+    box-sizing: border-box;
+}
+
+h2 {
+    text-align: center;
+    margin    : 1em;
+}
+
+.input-info {
+    padding: 0.40em;
+}
+
+.btn {
+    padding: 0.60em 1.25em;
+}
+
+.container {
+    margin               : 0 auto;
+    padding              : 1em;
+    max-width            : 720px;
+    min-width            : 350px;
+    display              : grid;
+    grid-template-columns: minmax(1em, 1fr) minmax(1em, 1fr);
+    grid-gap             : 1em 2em;
+}
+
+.actions {
+    margin         : 0 auto;
+    padding        : 1em;
+    max-width      : 720px;
+    min-width      : 350px;
+    display        : flex;
+    justify-content: space-around;
+}
+
+/* @media (min-width:600px) {
+    .container {}
+} */

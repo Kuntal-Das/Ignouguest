@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IGNOU Guest House Reservation</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <h2>Guest Reservation Form</h2>
+    <form id="guestForm" method="post">
+        <div class="container">
+
+            <label class="lbl-info" for="fName" id="lblFname">First Name :</label>
+            <input name="FirstName" class="input-info" id="fName" type="text" required />
+
+            <label class="lbl-info" for="lName" id="lblLname">Last Name :</label>
+            <input name="LastName" class="input-info" id="lName" type="text" required />
+
+            <label class="lbl-info" for="eAddr" id="lblemail">Email Address :</label>
+            <input name="Email" class="input-info" id="eAddr" type="email" required />
+
+            <label class="lbl-info" for="gID" id="lblGid">Govt Issued ID :</label>
+            <select name="GovtId" class="input-info" name="IDType" id="gID" required>
+                <option value="">Select ID type</option>
+                <option value="Pasport">Pasport</option>
+                <option value="Driving License">Driving License</option>
+                <option value="PAN Card">PAN Card</option>
+                <option value="Adhar Card">Adhar Card</option>
+                <option value="Voter Card">Voter Card</option>
+            </select>
+
+            <label class="lbl-info" for="IDno" id="lblIDno" hidden></label>
+            <input name="IDno" class="input-info" id="IDno" type="text" hidden required />
+
+            <label class="lbl-info" for="DOA" id="lblDOA">Date of Arrival :</label>
+            <input name="DtOfArrival" class="input-info" id="DOA" type="date" required />
+
+            <label class="lbl-info" for="DOD" id="lblDOD">Date of Departure :</label>
+            <input name="DtOfDeparture" class="input-info" id="DOD" type="date" required />
+
+            <label class="lbl-info" for="country" id="lblCountry">Country :</label>
+            <select name="Country" class="input-info" name="country" id="country" required>
+                <option value="">Select Country</option>
+                <option value="India">India</option>
+                <option value="Sri Lanka">Sri Lanka</option>
+                <option value="Bangladesh">Bangladesh</option>
+                <option value="Nepal">Nepal</option>
+                <option value="Pakistan">Pakistan</option>
+                <option value="China">China</option>
+                <option value="Indonesia">Indonesia</option>
+                <option value="Singapore">Singapore</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label class="lbl-info" for="noOfPersons">No of Persons :</label>
+            <input name="NoOfPersons" class="input-info" id="noOfPersons" type="number" min="1" max="100" value="1"
+                required />
+
+            <label class="lbl-info" for="sReq">Any Special Request :</label>
+            <input name="AnySpecialReq" class="input-info" id="sReq" type="text" />
+
+            <label class="lbl-info" id="lblPm">Payment Method :</label>
+            <div class="input-info">
+                <input name="PaymentMethod" id="pmDebit" type="radio" value="Debit" />
+                <label for="pmDebit">Debit</label>
+                <input name="PaymentMethod" id="pmCredit" type="radio" value="Creedit" />
+                <label for="pmCredit">Credit</label>
+            </div>
+
+        </div>
+        <div class="actions">
+            <button class="btn btn-submit" type="submit">Submit</button>
+            <button class="btn btn-cancel">Cancel</button>
+            <button class="btn btn-reset" type="reset">Reset</button>
+        </div>
+    </form>
+    <script type="Module" src="./script.js"></script>
+</body>
+
+</html>
