@@ -5,11 +5,8 @@ import { getFirestore, doc, setDoc, getDocs } from 'https://www.gstatic.com/fire
 
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.7.0/firebase-auth.js";
 
-let user = {
-    credential: "",
-    token: "",
-    uname: ""
-}
+let user = null, error = null;
+
 const firebaseConfig = {
     apiKey: "AIzaSyC1te_Se5d23huf2YMpI8E3JP2IIYlL8XA",
     authDomain: "ignouguest.firebaseapp.com",
@@ -34,6 +31,7 @@ const analytics = getAnalytics(app);
 
 async function SaveToDbAsync(formData) {
     try {
+        if (user === null) user = auth().currentUser;
         await setDoc(doc(db, "GuestsData", `${uniqueId()}`), formData)
         alert("saved to database");
     }
@@ -81,29 +79,26 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }
 
         const provider = new GoogleAuthProvider();
-        provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+        provider.addScope('https://www.googleapis.com/auth/admin.directory.customer');
         const auth = getAuth();
 
-        await signInWithPopup(auth, provider)
-            .then((result) => {
-                console.log(result);
-                // This gives you a Google Access Token. You can use it to access the Google API.
-                user.credential = GoogleAuthProvider.credentialFromResult(result);
-                user.token = credential.accessToken;
-                // The signed-in user info.
-                user.uname = result.user;
-                // ...
-            }).catch((error) => {
-                console.log(error);
-                // Handle Errors here.
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                // The email of the user's account used.
-                const email = error.email;
-                // The AuthCredential type that was used.
-                const credential = GoogleAuthProvider.credentialFromError(error);
-                // ...
-            });
+        if (currentUser !== null) {
+            try {
+
+                const result = await signInWithPopup(auth, provider)
+
+                user = auth().currentUser
+            }
+            catch (err) {
+                console.log(err.message);
+                error = {
+                    errorCode: err.code,
+                    errorMessage: err.message,
+                    email: err.email,
+                    credential: GoogleAuthProvider.credentialFromError(err),
+                };
+            }
+        }
 
         const formData = {
             Name: `${firstNameElmt.value} ${lastNameElmt.value}`,
