@@ -31,7 +31,7 @@ const analytics = getAnalytics(app);
 
 async function SaveToDbAsync(formData) {
     try {
-        if (user === null) user = auth.currentUser;
+        if (user === null) throw new Error("User not Signed In Can't Save to DB");
         await setDoc(doc(db, "GuestsData", `${uniqueId()}`), formData)
         alert("saved to database");
     }
@@ -50,6 +50,7 @@ async function GoogleSignIn() {
     }
     catch (err) {
         console.log(err.message);
+        alert(err.message);
         error = {
             errorCode: err.code,
             errorMessage: err.message,
