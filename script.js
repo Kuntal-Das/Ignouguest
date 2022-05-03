@@ -40,7 +40,7 @@ async function SaveToDbAsync(formData) {
     }
 }
 
-function GoogleSignIn() {
+async function GoogleSignIn() {
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
 
