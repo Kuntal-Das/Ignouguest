@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
         await SaveToDbAsync(formData);
         fromElmt.reset();
-        return true;
+        // return true;
     }
 
     function validateForm() {
