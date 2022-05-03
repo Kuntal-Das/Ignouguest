@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             alert(msg)
             return false;
         }
-        if (currentUser === null) GoogleSignIn();
+        if (user === null) GoogleSignIn();
 
         const formData = {
             Name: `${firstNameElmt.value} ${lastNameElmt.value}`,
